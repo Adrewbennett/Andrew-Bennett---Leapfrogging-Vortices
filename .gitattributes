@@ -1,0 +1,57 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+#vorticies are numbered 1 to 4, starting with the bottom left and moving clockwise, based on starting position.
+
+
+using LinearAlgebra
+
+#function "V" for the induced velocity as a vector from a vortex at (x1, y1) to a point (x2, y2) given circulation T
+function V(x1, y1, x2, y2, T)
+  cross([0; 0; T], [(x2 - x1); (y2 - y1); 0]) / (2 * pi * ((x2 - x1)^2 + (y2 - y1)^2))
+end
+
+#defines the destination arrays for the x and y coordinates for the location of each vortex
+Vx1 = [x1,]
+Vy1 = [y1,]
+Vx2 = [x2,]
+Vy2 = [y2,]
+Vx3 = [x3,]
+Vy3 = [y3,]
+Vx4 = [x4,]
+Vy4 = [y4,]
+
+#define variables outside of the tuple
+let t = 0 #defines t-initial, 0 seconds
+  x1 = 0
+  y1 = -.5
+  x2 = 0
+  y2 = 0.5
+  x3 = 1
+  y3 = 0.5
+  x4 = 1
+  y4 = -.5
+  T = 1
+  while t <=10
+    V1 = V(x4, y4, x1, y1, -T) + V(x3, y3, x1, y1, T) + V(x2, y2, x1, y1, T) #sum of vectors for Vortex 1
+    V2 = V(x4, y4, x2, y2, -T) + V(x3, y3, x2, y2, T) + V(x1, y1, x2, y2, -T) #sum of vectors for Vortex 2
+    V3 = V(x4, y4, x3, y3, -T) + V(x2, y2, x3, y3, T) + V(x1, y1, x3, y3, -T) #sum of vectors for Vortex 3
+    V4 = V(x3, y3, x4, y4, T) + V(x2, y2, x4, y4, T) + V(x1, y1, x4, y4, -T) #sum of vectors for Vortex 4
+    x1 = x1 + (V1[1] / 100) #lines 39-46 adjust the vortex location coordinates based on the new vectors divided by 100th of a second
+    y1 = y1 + (V1[2] / 100)
+    x2 = x2 + (V2[1] / 100)
+    y2 = y2 + (V2[2] / 100)
+    x3 = x3 + (V3[1] / 100)
+    y3 = y3 + (V3[2] / 100)
+    x4 = x4 + (V4[1] / 100)
+    y4 = y4 + (V4[2] / 100)
+    push!(Vx1, x1) #lines 47-54 add the new coordinates to the arrays of vortex coordinates
+    push!(Vy1, y1)
+    push!(Vx2, x2)
+    push!(Vy2, y2)
+    push!(Vx3, x3)
+    push!(Vy3, y3)
+    push!(Vx4, x4)
+    push!(Vy4, y4)
+    t = t + 0.01 #advances t by 0.01 for the next loop cycle
+  end
+end
