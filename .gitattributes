@@ -35,7 +35,7 @@ let t = 0 #defines t-initial, 0 seconds
   a4 = x4
   b4 = y4
   F = T
-  while t <=10
+  while t <=20
     V1 = V(a4, b4, a1, b1, -F) + V(a3, b3, a1, b1, F) + V(a2, b2, a1, b1, F) #sum of vectors for Vortex 1
     V2 = V(a4, b4, a2, b2, -F) + V(a3, b3, a2, b2, F) + V(a1, b1, a2, b2, -F) #sum of vectors for Vortex 2
     V3 = V(a4, b4, a3, b3, -F) + V(a2, b2, a3, b3, F) + V(a1, b1, a3, b3, -F) #sum of vectors for Vortex 3
@@ -60,7 +60,7 @@ let t = 0 #defines t-initial, 0 seconds
   end
 end
 
-plot(Vx1, Vy1, label="Vortex 1")
-plot!(Vx2, Vy2, label="Vortex 2")
-plot!(Vx3, Vy3, label="Vortex 3")
-plot!(Vx4, Vy4, label="Vortex 4")
+plot(Vx1, Vy1, linecolor="royalblue1", title="Vortex Paths")
+plot!(Vx2, Vy2, linecolor="royalblue1")
+plot!(Vx3, Vy3, linecolor="orangered")
+plot!(Vx4, Vy4, linecolor="orangered")
