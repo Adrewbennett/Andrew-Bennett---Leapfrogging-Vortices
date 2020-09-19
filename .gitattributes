@@ -60,7 +60,7 @@ let t = 0 #defines t-initial, 0 seconds
   end
 end
 
-plot(Vx1, Vy1, linecolor="royalblue1", title="Vortex Paths")
+plot(Vx1, Vy1, linecolor="royalblue1", legend = false, size = (800, 225))
 plot!(Vx2, Vy2, linecolor="royalblue1")
 plot!(Vx3, Vy3, linecolor="orangered")
 plot!(Vx4, Vy4, linecolor="orangered")
